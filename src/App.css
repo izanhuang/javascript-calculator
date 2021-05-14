@@ -13,29 +13,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 html {
   font-size: 175%;
   font-weight: 300;
@@ -69,11 +46,12 @@ body {
   height: 50px;
 }
 
-#display-bottom {
+#display {
   height: 50px;
 }
 
 .calculator-div {
+  display: grid;
   background-color: #999;
   display: grid;
   grid-gap: 1px;
@@ -85,20 +63,31 @@ body {
   height: 400px;
 }
 
+button {
+  border-style: none;
+}
+
+.symbol{
+  background-color: rgb(224, 223, 223);
+  border-style: none
+}
+
 #clear {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column: 1 / 3;
+  grid-row: 1;
 }
 
-#zero {
-  /*grid-column: 1 / span 2;*/
+.zero {
+  grid-column: 1 / 3;
   grid-row: 5;
-  grid-column-start: 1;
-  grid-column-end: 3;
 }
 
-#equals {
+.equals {
   grid-column: 4;
-  grid-row: 4 / span 2;
+  grid-row: 4 / 6;
 }
 
+button:hover {
+  /*background-image: linear-gradient(236deg, #74ebd5, #acb6e5); */
+  background-color: rgb(216, 215, 215);
+}

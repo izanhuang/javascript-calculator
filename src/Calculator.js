@@ -20,17 +20,17 @@ export default class Calculator extends Component {
             });
         } else if (event.target.id === '+' || event.target.id === '-' || event.target.id === '/' || event.target.id === '*'){
             if (this.state.entireInput.includes("=")) {
-                this.setState({ // 11+
+                this.setState({
                     entireInput: this.state.currentInput + event.target.id,
                     currentInput: event.target.id
                 });
             } else {
-                this.setState({ // 5+6+5
+                this.setState({
                     entireInput: this.state.entireInput + event.target.id,
                     currentInput: event.target.id
                 });
             }
-        } else if (event.target.id === '='){
+        } else if (event.target.id === 'equals'){
             result = eval(this.state.entireInput)
             this.setState({
                 entireInput: this.state.entireInput + "=" + result,
@@ -49,7 +49,7 @@ export default class Calculator extends Component {
             <div className="calculator">
                 <div className="calculator-display"></div>
                     <p id="display-top">{this.state.entireInput}</p>
-                    <p id="display-bottom">{this.state.currentInput}</p>
+                    <p id="display">{this.state.currentInput}</p>
                 <div className="calculator-div">
                     <button id="clear" onClick={this.handleClick}>AC</button>
                     <button id="/" className="symbol" onClick={this.handleClick}>/</button>
@@ -65,9 +65,9 @@ export default class Calculator extends Component {
                     <button id="1" onClick={this.handleClick}>1</button>
                     <button id="2" onClick={this.handleClick}>2</button>
                     <button id="3" onClick={this.handleClick}>3</button>
-                    <button id="0" onClick={this.handleClick}>0</button>
+                    <button id="0" className="zero" onClick={this.handleClick}>0</button>
                     <button id="." onClick={this.handleClick}>.</button>
-                    <button id="=" className="symbol" onClick={this.handleClick}>=</button>
+                    <button id="equals" className="equals" onClick={this.handleClick}>=</button>
                 </div>
             </div>
         )
