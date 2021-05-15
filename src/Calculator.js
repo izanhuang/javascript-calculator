@@ -97,7 +97,6 @@ export default class Calculator extends Component {
             }
         } else if (temp === '='){
             result = eval(this.state.entireInput)
-            console.log(result)
             this.setState({
                 entireInput: this.state.entireInput + "=" + result,
                 currentInput: result
@@ -132,6 +131,11 @@ export default class Calculator extends Component {
                     currentInput: this.state.entireInput + temp
                 });
             }
+        } else if (temp.match( /[0-9]/ ) && this.state.entireInput.match( /=[0-9]*$/ )){
+            this.setState({
+                entireInput: temp,
+                currentInput: temp
+            });
         } else {
             this.setState({
                 entireInput: this.state.entireInput + temp,
