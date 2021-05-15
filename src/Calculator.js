@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ButtonNumber from './ButtonNumber'
 
 export default class Calculator extends Component {
     constructor(props){
@@ -75,7 +74,17 @@ export default class Calculator extends Component {
                 currentInput: 0
             });
         } else if (temp === '+' || temp === '-' || temp === '/' || temp === '*'){
-            if (this.state.entireInput.includes("=")) {
+            if (this.state.entireInput.slice(-1) === temp) {
+                this.setState({
+                    entireInput: this.state.entireInput + " " + temp,
+                    currentInput: temp
+                });
+            } else if (this.state.entireInput.slice(-2).match( /[\+\*\/-]{2}/ )) {
+                this.setState({
+                    entireInput: this.state.entireInput.slice(0,-2) + temp,
+                    currentInput: temp
+                });
+            } else if (this.state.entireInput.includes("=")) {
                 this.setState({
                     entireInput: this.state.currentInput + temp,
                     currentInput: temp
@@ -88,12 +97,12 @@ export default class Calculator extends Component {
             }
         } else if (temp === '='){
             result = eval(this.state.entireInput)
+            console.log(result)
             this.setState({
                 entireInput: this.state.entireInput + "=" + result,
                 currentInput: result
             });
         } else if (temp === "" || temp === "0") {
-            console.log(this.state.entireInput.slice(-1))
             if (this.state.entireInput.slice(-1) === "0") {
                 this.setState({
                     entireInput: this.state.entireInput,
@@ -102,7 +111,7 @@ export default class Calculator extends Component {
             } else {
                 this.setState({
                     entireInput: this.state.entireInput + temp,
-                    currentInput: temp
+                    currentInput: this.state.entireInput + temp
                 });
             }
         } else if (temp === '.'){ // NULL MEANS ADD DOT
@@ -120,13 +129,13 @@ export default class Calculator extends Component {
             } else {
                 this.setState({
                     entireInput: this.state.entireInput + temp,
-                    currentInput: temp
+                    currentInput: this.state.entireInput + temp
                 });
             }
         } else {
             this.setState({
                 entireInput: this.state.entireInput + temp,
-                currentInput: temp
+                currentInput: this.state.entireInput + temp
             });
         }
     }
