@@ -101,7 +101,6 @@ export default class Calculator extends Component {
                 });
             }
         } else if (temp === '='){
-            console.log(this.state.entireInput.slice(-1).match( /[\+\*\/-]/ ))
             if (this.state.entireInput.slice(-1).match( /[\+\*\/-]/ )) { 
                 result = eval(this.state.entireInput.slice(0,-1))
                 this.setState({
