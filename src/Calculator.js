@@ -74,9 +74,14 @@ export default class Calculator extends Component {
                 currentInput: 0
             });
         } else if (temp === '+' || temp === '-' || temp === '/' || temp === '*'){
-            if (this.state.entireInput.slice(-1) === temp) {
+            if (this.state.entireInput.slice(-1) === "-" || this.state.entireInput.slice(-1) === "+") {
                 this.setState({
                     entireInput: this.state.entireInput + " " + temp,
+                    currentInput: temp
+                });
+            } else if (this.state.entireInput.slice(-1) === temp) {
+                this.setState({
+                    entireInput: this.state.entireInput,
                     currentInput: temp
                 });
             } else if (this.state.entireInput.slice(-2).match( /[\+\*\/-]{2}/ )) {
@@ -96,11 +101,20 @@ export default class Calculator extends Component {
                 });
             }
         } else if (temp === '='){
-            result = eval(this.state.entireInput)
-            this.setState({
-                entireInput: this.state.entireInput + "=" + result,
-                currentInput: result
-            });
+            console.log(this.state.entireInput.slice(-1).match( /[\+\*\/-]/ ))
+            if (this.state.entireInput.slice(-1).match( /[\+\*\/-]/ )) { 
+                result = eval(this.state.entireInput.slice(0,-1))
+                this.setState({
+                    entireInput: this.state.entireInput.slice(0,-1) + "=" + result,
+                    currentInput: result
+                });
+            } else {
+                result = eval(this.state.entireInput)
+                this.setState({
+                    entireInput: this.state.entireInput + "=" + result,
+                    currentInput: result
+                });
+            }
         } else if (temp === "" || temp === "0") {
             if (this.state.entireInput.slice(-1) === "0") {
                 this.setState({
@@ -131,7 +145,7 @@ export default class Calculator extends Component {
                     currentInput: this.state.entireInput + temp
                 });
             }
-        } else if (temp.match( /[0-9]/ ) && this.state.entireInput.match( /=[0-9]*$/ )){
+        } else if (temp.match( /[0-9]/ ) && this.state.entireInput.match( /=[-0-9.]*$/ )){
             this.setState({
                 entireInput: temp,
                 currentInput: temp
