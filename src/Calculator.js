@@ -73,20 +73,20 @@ export default class Calculator extends Component {
                 entireInput: '',
                 currentInput: 0
             });
-        } else if (temp === '+' || temp === '-' || temp === '/' || temp === '*'){
-            if (this.state.entireInput.slice(-1) === "-" || this.state.entireInput.slice(-1) === "+") {
+        } else if (temp === '+' || temp === '-' || temp === '/' || temp === '*'){ // - *+ vs *-+
+            if (this.state.entireInput.slice(-2).match( /[\+\*\/-]{2}/ )) {
                 this.setState({
-                    entireInput: this.state.entireInput + " " + temp,
+                    entireInput: this.state.entireInput.slice(0,-2) + temp,
                     currentInput: temp
                 });
-            } else if (this.state.entireInput.slice(-1) === temp) {
+            } else if (this.state.entireInput.slice(-1).match( /[\+\*\/]/ ) === temp) {
                 this.setState({
                     entireInput: this.state.entireInput,
                     currentInput: temp
                 });
-            } else if (this.state.entireInput.slice(-2).match( /[\+\*\/-]{2}/ )) {
+            } else if (this.state.entireInput.slice(-1) === "-") {
                 this.setState({
-                    entireInput: this.state.entireInput.slice(0,-2) + temp,
+                    entireInput: this.state.entireInput + " " + temp,
                     currentInput: temp
                 });
             } else if (this.state.entireInput.includes("=")) {
