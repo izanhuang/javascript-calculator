@@ -105,8 +105,8 @@ export default class Calculator extends Component {
                     currentInput: temp
                 });
             }
-        } else if (temp === '.'){
-            if (this.state.entireInput.slice(0, this.state.entireInput.length).match( /\.[0-9]+[\+\*\/-]/ ) == null) { 
+        } else if (temp === '.'){ // NULL MEANS ADD DOT
+            if (this.state.entireInput.match(  /[0-9]+\.[0-9]*$/ )) { 
                 //NOT ALLOWED TO ADD DECIMAL POINT, IF THERE WAS A PREVIOUS DECIMAL POINTS FOLLOWED BY ONE OR MORE NUMBERS FOLLOWED BY A MATH FUNCTION
                 this.setState({
                     entireInput: this.state.entireInput,
